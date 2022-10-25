@@ -36,13 +36,13 @@ Person.prototype.toString = function () {
 
 const person1 = new Person('Joshua', 45)
 
-console.log(person1.toString());
-console.log(person1.stomach);
-person1.eat('pizza');
-person1.eat('ice cream');
-console.log(person1.stomach);
-person1.poop();
-console.log(person1.stomach);
+// console.log(person1.toString());
+// console.log(person1.stomach);
+// person1.eat('pizza');
+// person1.eat('ice cream');
+// console.log(person1.stomach);
+// person1.poop();
+// console.log(person1.stomach);
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -81,8 +81,16 @@ Car.prototype.fill = function (gallons) {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(name, age, favoriteToy) {
 
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+  
+}
+
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
