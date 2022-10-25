@@ -70,7 +70,37 @@ function Car(model, milesPerGallon) {
 
 Car.prototype.fill = function (gallons) {
   this.tank += gallons;
+  return `Added ${gallons} gallons to the tank. The tank now holds ${this.tank} gallons of fuel.`
 }
+
+Car.prototype.drive = function (distance) {
+ 
+  let distanceNum = distance;
+  let stalled = false;
+  if (this.tank === 0) {
+    return `I can't go anywhere until you put some fuel in the tank.`;
+  } else if (this.tank*this.milesPerGallon >= distanceNum) {
+    this.tank -= distanceNum/this.milesPerGallon;
+  } else {
+    distanceNum = this.tank*this.milesPerGallon;
+    this.tank = 0;
+    stalled = true; 
+    
+  }
+  this.odometer += distanceNum;
+  return (stalled ? `I ran out of fuel at ${this.odometer} miles!`: `Drove ${distanceNum} miles.`);
+   
+}
+
+const car1 = new Car('Viper', 10);
+console.log(car1);
+console.log(car1.drive(2000));
+console.log(car1.fill(30));
+console.log(car1.fill(5));
+console.log(car1.drive(2000));
+console.log(car1.fill(10),car1.drive(10), car1.drive(2000), car1.odometer);
+
+// console.log(car1.drive(200));
 
 
 /*
